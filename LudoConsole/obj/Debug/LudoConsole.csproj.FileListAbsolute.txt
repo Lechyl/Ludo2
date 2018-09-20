@@ -12,3 +12,10 @@ C:\Users\aznzl\Desktop\Github\LudoConsole\LudoConsole\obj\Debug\LudoConsole.cspr
 C:\Users\aznzl\Desktop\Github\LudoConsole\LudoConsole\obj\Debug\LudoConsole.csproj.CoreCompileInputs.cache
 C:\Users\aznzl\Desktop\Github\LudoConsole\LudoConsole\obj\Debug\LudoConsole.exe
 C:\Users\aznzl\Desktop\Github\LudoConsole\LudoConsole\obj\Debug\LudoConsole.pdb
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\bin\Debug\LudoConsole.exe.config
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\bin\Debug\LudoConsole.exe
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\bin\Debug\LudoConsole.pdb
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\obj\Debug\LudoConsole.csprojAssemblyReference.cache
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\obj\Debug\LudoConsole.csproj.CoreCompileInputs.cache
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\obj\Debug\LudoConsole.exe
+C:\Users\aznzl\Desktop\Github\Ludo2\LudoConsole\obj\Debug\LudoConsole.pdb

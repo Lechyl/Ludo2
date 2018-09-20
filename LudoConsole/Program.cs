@@ -25,6 +25,7 @@ namespace LudoConsole
         public static bool winning = false;
         // enum TeamColor {Red,Blue,Green,Yellow }
 
+
         static void Main(string[] args)
         {
             
@@ -35,8 +36,8 @@ namespace LudoConsole
         public static void GamePlay()
         {
 
-            int counter = 0;
-
+            int counter = 1;
+           
             
             menu.menu();
             for (int i = 0; i < 58; i++)
@@ -48,6 +49,11 @@ namespace LudoConsole
             }
             while (!winning)
             {
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.White;
+                Console.WriteLine("\nRound {0} ", counter);
+                Console.ResetColor();
+
                 for (int i = 0; i < menu.players.Count; i++)
                 {
                     switch (menu.players[i])
@@ -91,13 +97,14 @@ namespace LudoConsole
                     }
                     Winning();
                 }
-                Console.WriteLine("Round {0} ", counter);
+
 
                 counter++;
             }
             Console.WriteLine("We has a Winner!");
             Console.ReadLine();
         }
+
         public static void Winning()
         {
             int red = 0;

@@ -9,18 +9,16 @@ namespace LudoConsole
 {
     class ColorTeams : Team
     {
-        //public static Board[] innerBoards = new Board[6];
 
-        Pieces piece;
-        Dice dice = new Dice();
-        int roll;
-        int pieceNr = 0;
-        bool notHome = true;
-        int rollCounter = 0;
-        bool canIMove = true;
-        //int[] piece.pieceCordi = new int[4] { 0, 0, 0, 0 };
-        string teamColor = "";
-        public string teamLogo = "";
+       Pieces piece;
+       Dice dice = new Dice();
+     private int roll;
+     private int pieceNr = 0;
+     private bool notHome = true;
+     private int rollCounter = 0;
+     private bool canIMove = true;
+     private string teamColor = "";
+     private string teamLogo = "";
         public ColorTeams(string teamColor1, int homeGround)
         {
             teamColor = teamColor1;
@@ -67,6 +65,7 @@ namespace LudoConsole
             }
             do
             {
+                Thread.Sleep(30);
                 roll = dice.diceroll(1, 7);
                 Thread.Sleep(30);
 

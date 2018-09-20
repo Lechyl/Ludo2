@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace LudoConsole
 {
-    class AITeam
+    class AITeam : Team
     {
         //This is an AI
             Pieces piece;
             Dice dice = new Dice();
-            int roll;
-            int pieceNr = 0;
-            bool notHome = true;
-            int rollCounter = 0;
-            bool canIMove = true;
-            //int[] piece.pieceCordi = new int[4] { 0, 0, 0, 0 };
-            string teamColor = "";
-            public string teamLogo = "";
+          private int roll;
+          private int pieceNr = 0;
+          private bool notHome = true;
+          private int rollCounter = 0;
+          private bool canIMove = true;
+           //int[] piece.pieceCordi = new int[4] { 0, 0, 0, 0 };
+          private string teamColor = "";
+          private  string teamLogo = "";
             public AITeam(string teamColor1, int homeGround)
             {
                 teamColor = teamColor1;
@@ -197,6 +197,7 @@ namespace LudoConsole
                 {
                     Print();
                 //pieceNr = int.Parse(Console.ReadLine()) - 1;
+                pieceNr = -1;
                 for (int i = 0; i < 4; i++)
                 {
                     if(boards[piece.pieceCordi[i] + roll].Brikker.Length == 1)
@@ -232,7 +233,7 @@ namespace LudoConsole
                         }
                     }
                 }
-                if(pieceNr != null)
+                if(pieceNr == -1)
                 {
                     int count = 0;
                     for (int i = 0; i < 4; i++)

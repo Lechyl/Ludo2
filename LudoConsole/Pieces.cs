@@ -26,10 +26,8 @@ namespace LudoConsole
 
         }
 
-        public void Men()
-        {
-            throw new NotImplementedException();
-        }
+        
+
     }
 
 }
