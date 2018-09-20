@@ -8,8 +8,10 @@ namespace LudoConsole
 {
     class Board
     {
+        private string _brikker;
+
         //52 felter uden End
-        public string Brikker { get; set; }
+        public string Brikker { get => _brikker; set => _brikker = value; }
 
 
     }

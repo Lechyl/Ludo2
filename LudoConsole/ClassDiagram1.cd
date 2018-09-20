@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="LudoConsole.Board">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+    <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Board.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LudoConsole.ColorTeams" BaseTypeListCollapsed="true">
-    <Position X="1.25" Y="2.25" Width="1.5" />
+    <Position X="7" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAACIEIAAABAAAABQAAIgAAAAAAAgEAAEAAAEAAA=</HashCode>
       <FileName>ColorTeams.cs</FileName>
@@ -20,48 +20,38 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LudoConsole.Dice">
-    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Position X="3.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAEA=</HashCode>
       <FileName>Dice.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LudoConsole.Pieces">
-    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Position X="0.5" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAQAAAAAAAAAAAAABAAAAMAAAAAAAAAAA=</HashCode>
       <FileName>Pieces.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LudoConsole.Program">
-    <Position X="5.25" Y="2.25" Width="1.5" />
+    <Position X="13" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAABCAAEAKAgBAQAAAAAAgAAAAAIAAIIAAABAACAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="dice" />
-      <Field Name="boards" />
-      <Field Name="redTeam" />
-      <Field Name="blueTeam" />
-      <Field Name="greenTeam" />
-      <Field Name="yellowTeam" />
-      <Field Name="redAITeam" />
-      <Field Name="blueAITeam" />
-      <Field Name="greenAITeam" />
-      <Field Name="yellowAITeam" />
-      <Field Name="menu" />
+      <Field Name="play" />
     </ShowAsAssociation>
   </Class>
   <Class Name="LudoConsole.Menu">
-    <Position X="3.25" Y="0.5" Width="1.5" />
+    <Position X="11.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Program.cs</FileName>
+      <FileName>Menu.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LudoConsole.AITeam">
-    <Position X="9.5" Y="2.75" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAACIEIAAABAAAABQAAIgAAAAAAAgEAAEAAAEAAA=</HashCode>
       <FileName>AITeam.cs</FileName>
@@ -72,8 +62,27 @@
     </ShowAsAssociation>
     <Lollipop Position="0.2" />
   </Class>
+  <Class Name="LudoConsole.GamePlay">
+    <Position X="10.5" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAAEACAgBAQAAAAAAgAAAAAIAAIoAAAAAACAAA=</HashCode>
+      <FileName>GamePlay.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="blueAITeam" />
+      <Field Name="blueTeam" />
+      <Field Name="boards" />
+      <Field Name="greenAITeam" />
+      <Field Name="greenTeam" />
+      <Field Name="menu" />
+      <Field Name="redAITeam" />
+      <Field Name="redTeam" />
+      <Field Name="yellowAITeam" />
+      <Field Name="yellowTeam" />
+    </ShowAsAssociation>
+  </Class>
   <Interface Name="LudoConsole.Team">
-    <Position X="1.25" Y="0.5" Width="1.5" />
+    <Position X="3.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Team.cs</FileName>

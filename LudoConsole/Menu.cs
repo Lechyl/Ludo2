@@ -8,7 +8,7 @@ namespace LudoConsole
 {
     class Menu
     {
-        string[] Chose = new string[4] { "Red", "Blue", "Green", "Yellow" };
+        private string[] Chose = new string[4] { "Red", "Blue", "Green", "Yellow" };
         public List<string> players = new List<string>();
         // public List<string> AI = new List<string>();
 

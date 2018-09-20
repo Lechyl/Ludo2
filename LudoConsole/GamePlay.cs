@@ -8,8 +8,8 @@ namespace LudoConsole
 {
     class GamePlay
     {
-        Dice dice = new Dice();
         Board[] boards = new Board[58];
+        Menu menu = new Menu();
         ColorTeams redTeam = new ColorTeams("Red", 0);
         ColorTeams blueTeam = new ColorTeams("Blue", 13);
         ColorTeams greenTeam = new ColorTeams("Green", 26);
@@ -19,7 +19,6 @@ namespace LudoConsole
         AITeam greenAITeam = new AITeam("Green AI", 26);
         AITeam yellowAITeam = new AITeam("Yellow AI", 39);
 
-        Menu menu = new Menu();
         bool winning = false;
         public void Play()
         {
