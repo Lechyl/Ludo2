@@ -3,3 +3,4 @@
 *.exe
 *.exe
 .vs/LudoConsole/v15/.suo
+LudoConsole/bin/Debug/LudoConsole.exe.config
