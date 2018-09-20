@@ -64,6 +64,16 @@ namespace LudoConsole
 
 
                 }
+            piece.piecesOut = false;
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                if (piece.pieceCordi[i] != -1)
+                {
+                    piece.piecesOut = true;
+                }
+            }
                 do
                 {
                     roll = dice.diceroll(1, 7);
@@ -109,7 +119,7 @@ namespace LudoConsole
                         Console.WriteLine("Yes, I want to revive a piece");
                          canIMove = false;
 
-                             if (boards[piece.home].Brikker.Length > 0)
+                             if (boards[piece.home].Brikker.Length >= 1)
                              {
                                 if (boards[piece.home].Brikker.StartsWith(teamLogo))
                                 {
@@ -136,6 +146,7 @@ namespace LudoConsole
               
                 
                     }
+
             if (canIMove)
             {
                 Console.WriteLine("No, All my pieces are out");
@@ -147,20 +158,25 @@ namespace LudoConsole
             }
             public Board[] innerCircle(Board[] boards)
             {
-                //54 slår 4.
-                int i = 0;
+            //54 slår 4.
+            bool not = false;
+            string input = "";
                 foreach (char item in boards[piece.pieceCordi[pieceNr]].Brikker)
                 {
 
-                    if (item == Convert.ToChar(teamLogo))
+                if (item == Convert.ToChar(teamLogo) && not == false)
                     {
-                        boards[piece.pieceCordi[pieceNr]].Brikker.Remove(i, 1);
-                        break;
-                    }
-                    i++;
+                    not = true;
+                       
+                   }
+                else
+                {
+                    input += item.ToString();
                 }
-                i = 0;
-                int nextTile = piece.pieceCordi[pieceNr] + roll;
+                }
+            boards[piece.pieceCordi[pieceNr]].Brikker += input;
+
+            int nextTile = piece.pieceCordi[pieceNr] + roll;
 
                 if (nextTile > 57)
                 {
@@ -262,11 +278,17 @@ namespace LudoConsole
 
                         if (piece.pieceCordi[pieceNr] > -1 && piece.pieceCordi[pieceNr] < 52)
                         {
-                            int oldCordi = piece.pieceCordi[pieceNr];
-
-                            //delete old cordi
-                            //         int deleteChar = boards[oldCordi].Brikker.IndexOf(teamLogo);
-                       string removed = boards[oldCordi].Brikker.Remove(0, 1);
+                          int oldCordi = piece.pieceCordi[pieceNr];
+                        
+                       string removed = boards[oldCordi].Brikker;
+                        char[] please = removed.ToCharArray();
+                        
+                        List<char> sad = please.ToList();
+                            sad.Remove(sad[0]);
+                        foreach(char c in sad)
+                        {
+                            removed += c;
+                        }
                         boards[oldCordi].Brikker = removed;
 
                             if ((piece.pieceCordi[pieceNr] + roll) < 52)

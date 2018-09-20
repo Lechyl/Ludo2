@@ -12,7 +12,7 @@ namespace LudoConsole
 
         //52 felter uden End
         public string Brikker { get => _brikker; set => _brikker = value; }
-
+        
 
     }
 }

@@ -13,7 +13,7 @@ namespace LudoConsole
         ColorTeams redTeam = new ColorTeams("Red", 0);
         ColorTeams blueTeam = new ColorTeams("Blue", 13);
         ColorTeams greenTeam = new ColorTeams("Green", 26);
-        ColorTeams yellowTeam = new ColorTeams("Yellow", 47);
+        ColorTeams yellowTeam = new ColorTeams("Yellow", 39);
         AITeam redAITeam = new AITeam("Red AI", 0);
         AITeam blueAITeam = new AITeam("Blue AI", 13);
         AITeam greenAITeam = new AITeam("Green AI", 26);

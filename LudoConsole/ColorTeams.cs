@@ -63,6 +63,16 @@ namespace LudoConsole
 
 
             }
+            piece.piecesOut = false;
+
+            for (int i = 0; i < 4; i++)
+            {
+
+                if (piece.pieceCordi[i] != -1)
+                {
+                    piece.piecesOut = true;
+                }
+            }
             do
             {
                 Thread.Sleep(30);
@@ -147,18 +157,22 @@ namespace LudoConsole
         public Board[] innerCircle(Board[] boards)
         {
             //54 slår 4.
-            int i = 0;
+            bool not = false;
+            string input = "";
             foreach (char item in boards[piece.pieceCordi[pieceNr]].Brikker)
             {
 
-                if (item == Convert.ToChar(teamLogo))
+                if (item == Convert.ToChar(teamLogo) && not == false)
                 {
-                    boards[piece.pieceCordi[pieceNr]].Brikker.Remove(i, 1);
-                    break;
+                    not = true;
+
                 }
-                i++;
+                else
+                {
+                    input += item.ToString();
+                }
             }
-            i = 0;
+            boards[piece.pieceCordi[pieceNr]].Brikker += input;
             int nextTile = piece.pieceCordi[pieceNr] + roll;
 
             if (nextTile > 57)
@@ -195,7 +209,16 @@ namespace LudoConsole
             do
             {
                 Print();
-                pieceNr = int.Parse(Console.ReadLine()) - 1;
+                try
+                {
+                    pieceNr = int.Parse(Console.ReadLine()) - 1;
+
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Error Wrong: " + e);
+                    
+                }
                 if (piece.pieceCordi[pieceNr] >= (piece.win - 6) && piece.pieceCordi[pieceNr] <= piece.win || piece.pieceCordi[pieceNr] >= 52 && piece.pieceCordi[pieceNr] <= 57 )
                 {
                     if (piece.pieceCordi[pieceNr] + roll >= piece.win)
@@ -211,7 +234,15 @@ namespace LudoConsole
                     {
                         int oldCordi = piece.pieceCordi[pieceNr];
 
-                        string removed = boards[oldCordi].Brikker.Remove(0, 1);
+                        string removed = boards[oldCordi].Brikker;
+                        char[] please = removed.ToCharArray();
+
+                        List<char> sad = please.ToList();
+                        sad.Remove(sad[0]);
+                        foreach (char c in sad)
+                        {
+                            removed += c;
+                        }
                         boards[oldCordi].Brikker = removed;
 
                         Console.WriteLine("This piece can be moved");
@@ -261,7 +292,8 @@ namespace LudoConsole
                             else
                             {
                                 string check = boards[piece.pieceCordi[pieceNr]].Brikker;
-                                if (check.Substring(0, 1) != teamLogo)
+                                check = check.Substring(0, 1);
+                                if (check != teamLogo)
                                 {
                                     piece.pieceCordi[pieceNr] = -1;
                                     break;
