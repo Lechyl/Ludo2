@@ -8,3 +8,5 @@ LudoConsole/bin/Debug/LudoConsole.exe.config
 *.ide
 *.ide-shm
 *.ide-wal
+*.exe
+*.pdb

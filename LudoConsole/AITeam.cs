@@ -17,7 +17,6 @@ namespace LudoConsole
           private bool notHome = true;
           private int rollCounter = 0;
           private bool canIMove = true;
-           //int[] piece.pieceCordi = new int[4] { 0, 0, 0, 0 };
           private string teamColor = "";
           private  string teamLogo = "";
             public AITeam(string teamColor1, int homeGround)
@@ -111,7 +110,7 @@ namespace LudoConsole
                          canIMove = false;
 
                              if (boards[piece.home].Brikker.Length > 0)
-                            {
+                             {
                                 if (boards[piece.home].Brikker.StartsWith(teamLogo))
                                 {
                                     piece.pieceCordi[i] = piece.home;
@@ -134,11 +133,13 @@ namespace LudoConsole
                             }
 
                         }
-                else { Console.WriteLine("No, All my pieces are out"); }
-
+              
                 
                     }
-
+            if (canIMove)
+            {
+                Console.WriteLine("No, All my pieces are out");
+            }
                     piece.piecesOut = true;
                 
 
@@ -175,16 +176,7 @@ namespace LudoConsole
             {
                 string text = "pieces is on {0}, {1}, {2}, {3}";
                 string text2 = "Chose which piece to move [1][2][3][4]";
-                for (int i = 0; i < 4; i++)
-                {
-                    if (piece.pieceCordi[i] == 57)
-                    {
-                        text2.Replace(i.ToString(), "");
-
-                        text.Replace((i + 1).ToString(), "");
-                    }
-
-                }
+               
                 Console.WriteLine(text, piece.pieceCordi[0], piece.pieceCordi[1], piece.pieceCordi[2], piece.pieceCordi[3]);
 
                 Console.WriteLine(text2);
@@ -193,60 +185,79 @@ namespace LudoConsole
             public Board[] Move(Board[] boards)
             {
                 bool innerBoard = false;
-                do
-                {
-                    Print();
-                //pieceNr = int.Parse(Console.ReadLine()) - 1;
-                pieceNr = -1;
-                for (int i = 0; i < 4; i++)
-                {
-                    if(boards[piece.pieceCordi[i] + roll].Brikker.Length == 1)
-                    {
-                        pieceNr = i;
-                        break;
-                    }
+            bool ChosenPiece = false;
 
-                }
-                if(pieceNr == -1)
+            do
+            {
+                    Print();
+
+                //   if Check if pieces coordination + roll can destroy enemy piece//
+                if (!ChosenPiece)
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        if(piece.pieceCordi[i] + roll == 57)
+                        
+                        if (boards[piece.pieceCordi[i] + roll].Brikker.Length == 1 && piece.pieceCordi[i] != -1)
                         {
                             pieceNr = i;
+                            ChosenPiece = true;
+                            break;
+                        }
+
+                    }
+                }
+                // if piece is  in InnerCircle and can go to Goal Move piece //
+                if (!ChosenPiece)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if(piece.pieceCordi[i] + roll == 57 && piece.pieceCordi[i] != -1)
+                        {
+                            pieceNr = i;
+                            ChosenPiece = true;
+
                             innerBoard = true;
                         }
                     }
                 }
-                if(pieceNr == -1)
+                // if piece is close to its innerCircle move piece //
+                if (!ChosenPiece)
                 {
                     for (int i = 0; i < 4; i++)
                     {
-                        if (piece.pieceCordi[i] >= (piece.win - 6) && piece.pieceCordi[i] <= piece.win)
+                        if (piece.pieceCordi[i] >= (piece.win - 6) && piece.pieceCordi[i] <= piece.win && piece.pieceCordi[i] != -1)
                         {
                             if (piece.pieceCordi[i] + roll >= piece.win)
                             {
                                 pieceNr = i;
                                 innerBoard = true;
+                                ChosenPiece = true;
 
                             }
                         }
                     }
+
+                    // Move a random piece //
+
+
+
                 }
-                if(pieceNr == -1)
+
+                if (!ChosenPiece)
                 {
                     int count = 0;
                     for (int i = 0; i < 4; i++)
                     {
-                        if(piece.pieceCordi[i] > -1)
+                        if (piece.pieceCordi[i] > -1 && piece.pieceCordi[i] != -1)
                         {
                             count++;
                         }
                     }
                     pieceNr = dice.diceroll(0, count);
+                    count = 0;
                 }
-
-                    if (!innerBoard)
+                ChosenPiece = false;
+                if (!innerBoard)
                     {
 
                         if (piece.pieceCordi[pieceNr] > -1 && piece.pieceCordi[pieceNr] < 52)
@@ -255,9 +266,9 @@ namespace LudoConsole
 
                             //delete old cordi
                             //         int deleteChar = boards[oldCordi].Brikker.IndexOf(teamLogo);
-                            boards[piece.pieceCordi[pieceNr]].Brikker.Remove(0, 1);
+                       string removed = boards[oldCordi].Brikker.Remove(0, 1);
+                        boards[oldCordi].Brikker = removed;
 
-                            Console.WriteLine("This piece can be moved");
                             if ((piece.pieceCordi[pieceNr] + roll) < 52)
                             {
                                 int nextTile = piece.pieceCordi[pieceNr] + roll;
@@ -331,13 +342,15 @@ namespace LudoConsole
                         boards = innerCircle(boards);
                         notHome = false;
                     }
+               
 
-                }
-                while (notHome);
+            }
+            while (notHome);
 
                 notHome = true;
+            Console.WriteLine("I'm moving piece {0} to coordinate {1}", pieceNr +1, piece.pieceCordi[pieceNr]);
 
-                Console.WriteLine("pieces is on {0}, {1}, {2}, {3}", piece.pieceCordi[0], piece.pieceCordi[1], piece.pieceCordi[2], piece.pieceCordi[3]);
+            Console.WriteLine("pieces is on {0}, {1}, {2}, {3}", piece.pieceCordi[0], piece.pieceCordi[1], piece.pieceCordi[2], piece.pieceCordi[3]);
                 return boards;
             }
         }

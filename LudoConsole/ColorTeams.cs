@@ -196,7 +196,7 @@ namespace LudoConsole
             {
                 Print();
                 pieceNr = int.Parse(Console.ReadLine()) - 1;
-                if (piece.pieceCordi[pieceNr] >= (piece.win - 6) && piece.pieceCordi[pieceNr] < 57)
+                if (piece.pieceCordi[pieceNr] >= (piece.win - 6) && piece.pieceCordi[pieceNr] <= piece.win || piece.pieceCordi[pieceNr] >= 52 && piece.pieceCordi[pieceNr] <= 57 )
                 {
                     if (piece.pieceCordi[pieceNr] + roll >= piece.win)
                     {
@@ -211,9 +211,8 @@ namespace LudoConsole
                     {
                         int oldCordi = piece.pieceCordi[pieceNr];
 
-                        //delete old cordi
-                        //         int deleteChar = boards[oldCordi].Brikker.IndexOf(teamLogo);
-                        boards[piece.pieceCordi[pieceNr]].Brikker.Remove(0, 1);
+                        string removed = boards[oldCordi].Brikker.Remove(0, 1);
+                        boards[oldCordi].Brikker = removed;
 
                         Console.WriteLine("This piece can be moved");
                         if ((piece.pieceCordi[pieceNr] + roll) < 52)
@@ -245,7 +244,6 @@ namespace LudoConsole
                         else
                         {
 
-                            piece.pieceCordi[pieceNr] = (piece.pieceCordi[pieceNr] + roll) - 52;
 
                             int nextTile = (piece.pieceCordi[pieceNr] + roll) - 52;
                             if (boards[nextTile].Brikker.Length <= 1)
@@ -294,6 +292,7 @@ namespace LudoConsole
             while (notHome);
 
             notHome = true;
+            Console.WriteLine("I'm moving piece {0} to coordinate {1}", pieceNr + 1, piece.pieceCordi[pieceNr]);
 
             Console.WriteLine("pieces is on {0}, {1}, {2}, {3}", piece.pieceCordi[0], piece.pieceCordi[1], piece.pieceCordi[2], piece.pieceCordi[3]);
             return boards;

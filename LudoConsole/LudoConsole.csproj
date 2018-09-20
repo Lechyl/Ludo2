@@ -46,6 +46,8 @@
     <Compile Include="Board.cs" />
     <Compile Include="ColorTeams.cs" />
     <Compile Include="Dice.cs" />
+    <Compile Include="GamePlay.cs" />
+    <Compile Include="Menu.cs" />
     <Compile Include="Pieces.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
