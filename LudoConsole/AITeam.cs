@@ -12,13 +12,13 @@ namespace LudoConsole
         //This is an AI
         Pieces piece;
         Dice dice = new Dice();
-        private int roll;
-        private int pieceNr = 0;
+        private int roll { get; set; }
+        private int pieceNr { get; set; }
         private bool notHome = true;
-        private int rollCounter = 0;
+        private int rollCounter { get; set; }
         private bool canIMove = true;
-        private string teamColor = "";
-        private string teamLogo = "";
+        private string teamColor { get; }
+        private string teamLogo { get; }
         public AITeam(string teamColor1, int homeGround)
         {
             teamColor = teamColor1;
@@ -176,8 +176,34 @@ namespace LudoConsole
             }
             boards[piece.pieceCordi[pieceNr]].Brikker += input;
 
-            int nextTile = piece.pieceCordi[pieceNr] + roll;
+            int nextTile = 0;
+            if (teamLogo == "R")
+            {
+                if (piece.pieceCordi[pieceNr] <= piece.win)
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll + 1;
 
+                }
+                else
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll;
+
+                }
+
+
+            }
+            else
+            {
+                if (piece.pieceCordi[pieceNr] <= piece.win)
+                {
+                    nextTile = 51 + (piece.pieceCordi[pieceNr] + roll) - piece.win;
+                }
+                else
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll;
+
+                }
+            }
             if (nextTile > 57)
             {
                 nextTile = 57 - (nextTile - 57);
@@ -207,7 +233,7 @@ namespace LudoConsole
             do
             {
                 Print();
-
+                // AI START --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //   if Check if pieces coordination + roll can destroy enemy piece//
                 if (!ChosenPiece)
                 {
@@ -244,7 +270,7 @@ namespace LudoConsole
                     {
                         if (piece.pieceCordi[i] >= (piece.win - 6) && piece.pieceCordi[i] <= piece.win && piece.pieceCordi[i] != -1)
                         {
-                            if (piece.pieceCordi[i] + roll >= piece.win)
+                            if (piece.pieceCordi[i] + roll > piece.win)
                             {
                                 pieceNr = i;
                                 innerBoard = true;
@@ -255,7 +281,7 @@ namespace LudoConsole
                     }
                 }
 
-                if (!ChosenPiece)
+                if (!ChosenPiece) // move a random Piece
                 {
                     int count = 0;
                     List<int> stillAlive = new List<int>();
@@ -272,7 +298,7 @@ namespace LudoConsole
                     count = 0;
                 }
 
-                // AI END
+                // AI END   --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 ChosenPiece = false;
                 if (!innerBoard)
                 {
@@ -321,10 +347,19 @@ namespace LudoConsole
                             else
                             {
                                 string check = boards[nextTile].Brikker;
-                                if (check.Substring(0, 1) != teamLogo)
+                                check = check.Substring(0, 1);
+
+                                if (check != teamLogo)
                                 {
                                     piece.pieceCordi[pieceNr] = -1;
+                                    notHome = false;
+
                                     break;
+                                }
+                                else
+                                {
+                                    boards[nextTile].Brikker += teamLogo;
+
                                 }
                             }
                             piece.pieceCordi[pieceNr] = nextTile;
@@ -349,10 +384,19 @@ namespace LudoConsole
                             else
                             {
                                 string check = boards[piece.pieceCordi[pieceNr]].Brikker;
-                                if (check.Substring(0, 1) != teamLogo)
+                                check = check.Substring(0, 1);
+
+                                if (check != teamLogo)
                                 {
                                     piece.pieceCordi[pieceNr] = -1;
+                                    notHome = false;
+
                                     break;
+                                }
+                                else
+                                {
+                                    boards[nextTile].Brikker += teamLogo;
+
                                 }
                             }
                             piece.pieceCordi[pieceNr] = nextTile;

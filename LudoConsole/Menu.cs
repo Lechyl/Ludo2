@@ -24,7 +24,7 @@ namespace LudoConsole
                     Console.WriteLine(Chose[e]);
                 }
                 string svar = Console.ReadLine();
-
+                // You can type done without a player if you only wants Bots to play 
                 if (svar.ToLower() == "done")
                 {
                     for (int e = 0; e < 4; e++)

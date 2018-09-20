@@ -10,15 +10,15 @@ namespace LudoConsole
     class ColorTeams : Team
     {
 
-       Pieces piece;
-       Dice dice = new Dice();
-     private int roll;
-     private int pieceNr = 0;
-     private bool notHome = true;
-     private int rollCounter = 0;
-     private bool canIMove = true;
-     private string teamColor = "";
-     private string teamLogo = "";
+        Pieces piece;
+        Dice dice = new Dice();
+        private int roll { get; set; }
+        private int pieceNr { get; set; }
+        private bool notHome = true;
+        private int rollCounter { get; set; }
+        private bool canIMove = true;
+        private string teamColor { get; }
+        private string teamLogo { get; }
         public ColorTeams(string teamColor1, int homeGround)
         {
             teamColor = teamColor1;
@@ -77,7 +77,7 @@ namespace LudoConsole
             {
                 Thread.Sleep(30);
                 roll = dice.diceroll(1, 7);
-                Thread.Sleep(30);
+                
 
                 rollCounter++;
                 Console.WriteLine("You've rolled a {0}", roll);
@@ -113,24 +113,26 @@ namespace LudoConsole
             string svar = Console.ReadLine();
             if (svar.ToLower() == "y" || svar == "")
             {
-
+                //Check the next piece to revive
                 for (int i = 0; i < 4; i++)
                 {
+                   
                     if (piece.pieceCordi[i] == -1)
                     {
                         piece.piecesOut = true;
                         canIMove = false;
                         Console.WriteLine("You've revived a piece");
+                        //If someone is on Home Tile
                         if (boards[piece.home].Brikker.Length > 0)
                         {
 
-
+                            // is it enemy or allies
                             if (boards[piece.home].Brikker.StartsWith(teamLogo))
                             {
                                 piece.pieceCordi[i] = piece.home;
                                 boards[piece.pieceCordi[i]].Brikker += teamLogo;
                                 break;
-                            } 
+                            }
                             else
                             {
                                 piece.pieceCordi[i] = piece.home;
@@ -159,6 +161,7 @@ namespace LudoConsole
             //54 slår 4.
             bool not = false;
             string input = "";
+            // Removing the pieces old coordinates
             foreach (char item in boards[piece.pieceCordi[pieceNr]].Brikker)
             {
 
@@ -173,13 +176,43 @@ namespace LudoConsole
                 }
             }
             boards[piece.pieceCordi[pieceNr]].Brikker += input;
-            int nextTile = piece.pieceCordi[pieceNr] + roll;
+            // next location in innercircle
+            int nextTile =  0;
+            if(teamLogo == "R")
+            {
+                if(piece.pieceCordi[pieceNr] <= piece.win)
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll + 1;
 
+                }
+                else
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll;
+
+                }
+
+
+            }
+            else
+            {
+                if (piece.pieceCordi[pieceNr] <= piece.win)
+                {
+                    nextTile = 51 + (piece.pieceCordi[pieceNr] + roll) - piece.win;
+                }
+                else
+                {
+                    nextTile = piece.pieceCordi[pieceNr] + roll;
+
+                }
+            }
+
+            //If you're moving over 57 then go backward.
             if (nextTile > 57)
             {
                 nextTile = 57 - (nextTile - 57);
 
             }
+            //Set new coordinate for piece
             boards[nextTile].Brikker += teamLogo;
             piece.pieceCordi[pieceNr] = nextTile;
 
@@ -214,14 +247,14 @@ namespace LudoConsole
                     pieceNr = int.Parse(Console.ReadLine()) - 1;
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine("Error Wrong: " + e);
-                    
+
                 }
-                if (piece.pieceCordi[pieceNr] >= (piece.win - 6) && piece.pieceCordi[pieceNr] <= piece.win || piece.pieceCordi[pieceNr] >= 52 && piece.pieceCordi[pieceNr] <= 57 )
+                if (piece.pieceCordi[pieceNr] >= (piece.win - 6) && piece.pieceCordi[pieceNr] <= piece.win || piece.pieceCordi[pieceNr] >= 52 && piece.pieceCordi[pieceNr] <= 57)
                 {
-                    if (piece.pieceCordi[pieceNr] + roll >= piece.win)
+                    if (piece.pieceCordi[pieceNr] + roll > piece.win)
                     {
                         innerBoard = true;
 
@@ -235,9 +268,9 @@ namespace LudoConsole
                         int oldCordi = piece.pieceCordi[pieceNr];
 
                         string removed = boards[oldCordi].Brikker;
-                  //      Console.WriteLine(removed + " Before");
+                        //      Console.WriteLine(removed + " Before");
                         char[] please = removed.ToCharArray();
-                        
+
                         List<char> sad = please.ToList();
                         sad.Remove(Convert.ToChar(teamLogo));
                         bool remove = false;
@@ -258,11 +291,14 @@ namespace LudoConsole
                         //Console.WriteLine(boards[oldCordi].Brikker + " after");
 
                         Console.WriteLine("This piece can be moved");
+                        // if you are not going back into the loop
                         if ((piece.pieceCordi[pieceNr] + roll) < 52)
                         {
                             int nextTile = piece.pieceCordi[pieceNr] + roll;
+                            //if someone is on the tile you want to move to and there is 1 or 0 opponent
                             if (boards[nextTile].Brikker.Length <= 1)
                             {
+                                //is he friend or enemy
                                 if (boards[nextTile].Brikker == teamLogo || boards[nextTile].Brikker == "")
                                 {
                                     boards[nextTile].Brikker += teamLogo;
@@ -273,18 +309,26 @@ namespace LudoConsole
                                 }
 
                             }
-                            else
+                            else // There are atleast 2 on this tile
                             {
                                 string check = boards[nextTile].Brikker;
-                                if (check.Substring(0, 1) != teamLogo)
+                                check = check.Substring(0, 1);
+                                //are they friends or enemies
+                                if (check != teamLogo)
                                 {
                                     piece.pieceCordi[pieceNr] = -1;
+                                    notHome = false;
+
                                     break;
+                                }
+                                else
+                                {
+                                    boards[nextTile].Brikker += teamLogo;
                                 }
                             }
                             piece.pieceCordi[pieceNr] = nextTile;
                         }
-                        else
+                        else // you're going back into the loop
                         {
 
 
@@ -308,7 +352,14 @@ namespace LudoConsole
                                 if (check != teamLogo)
                                 {
                                     piece.pieceCordi[pieceNr] = -1;
+                                    notHome = false;
+
                                     break;
+                                }
+                                else
+                                {
+                                    boards[nextTile].Brikker += teamLogo;
+
                                 }
                             }
                             piece.pieceCordi[pieceNr] = nextTile;

@@ -3,7 +3,7 @@
   <Class Name="LudoConsole.Board">
     <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAEAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Board.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -69,20 +69,20 @@
       <FileName>GamePlay.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="blueAITeam" />
-      <Field Name="blueTeam" />
       <Field Name="boards" />
-      <Field Name="greenAITeam" />
-      <Field Name="greenTeam" />
       <Field Name="menu" />
-      <Field Name="redAITeam" />
       <Field Name="redTeam" />
-      <Field Name="yellowAITeam" />
+      <Field Name="blueTeam" />
+      <Field Name="greenTeam" />
       <Field Name="yellowTeam" />
+      <Field Name="redAITeam" />
+      <Field Name="blueAITeam" />
+      <Field Name="greenAITeam" />
+      <Field Name="yellowAITeam" />
     </ShowAsAssociation>
   </Class>
   <Interface Name="LudoConsole.Team">
-    <Position X="3.75" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Team.cs</FileName>

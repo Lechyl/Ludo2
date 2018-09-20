@@ -92,7 +92,7 @@ namespace LudoConsole
             Console.ReadLine();
         }
 
-        public void Winning()
+        private void Winning()
         {
             int red = 0;
             int blue = 0;

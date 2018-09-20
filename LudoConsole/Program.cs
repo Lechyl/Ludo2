@@ -11,7 +11,7 @@ namespace LudoConsole
         //mafpgpiødød
 
         // enum TeamColor {Red,Blue,Green,Yellow }
-        static GamePlay play = new GamePlay();
+        static readonly GamePlay play = new GamePlay();
 
 
         static void Main(string[] args)
