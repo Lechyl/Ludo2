@@ -235,15 +235,27 @@ namespace LudoConsole
                         int oldCordi = piece.pieceCordi[pieceNr];
 
                         string removed = boards[oldCordi].Brikker;
+                  //      Console.WriteLine(removed + " Before");
                         char[] please = removed.ToCharArray();
-
+                        
                         List<char> sad = please.ToList();
-                        sad.Remove(sad[0]);
+                        sad.Remove(Convert.ToChar(teamLogo));
+                        bool remove = false;
+                        removed = "";
                         foreach (char c in sad)
                         {
-                            removed += c;
+                            if (c == Convert.ToChar(teamLogo) && remove == false)
+                            {
+                                remove = true;
+                            }
+                            else
+                            {
+                                removed += c.ToString();
+
+                            }
                         }
                         boards[oldCordi].Brikker = removed;
+                        //Console.WriteLine(boards[oldCordi].Brikker + " after");
 
                         Console.WriteLine("This piece can be moved");
                         if ((piece.pieceCordi[pieceNr] + roll) < 52)

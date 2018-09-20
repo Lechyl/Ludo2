@@ -38,7 +38,7 @@ namespace LudoConsole
             {
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.White;
-                Console.WriteLine("\nRound {0} ", counter);
+                Console.WriteLine("\nRound {0}                                                                                                                 ", counter);
                 Console.ResetColor();
 
                 for (int i = 0; i < menu.players.Count; i++)
