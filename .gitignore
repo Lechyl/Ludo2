@@ -14,3 +14,5 @@ LudoConsole/bin/Debug/LudoConsole.exe.config
 *.pdb
 *.pdb
 
+*.pdb
+*.exe
