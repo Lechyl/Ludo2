@@ -4,3 +4,7 @@
 *.exe
 .vs/LudoConsole/v15/.suo
 LudoConsole/bin/Debug/LudoConsole.exe.config
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
